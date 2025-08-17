@@ -3,7 +3,6 @@ package com.hems.SpringBootRest;
 import com.hems.SpringBootRest.model.JobPost;
 import com.hems.SpringBootRest.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +33,16 @@ public class JobRestController {
     @DeleteMapping("jobPost/{postId}")
     public void deleteJob(@PathVariable int postId){
         service.deleteJob(postId);
+    }
+
+    @GetMapping("jobPost/keyword/{keyword}")
+    public List<JobPost> searchKeyword(@PathVariable String keyword){
+        return service.searchKeyword(keyword);
+    }
+
+    @GetMapping("load")
+    public String loadData() {
+        service.load();
+        return "success";
     }
 }
